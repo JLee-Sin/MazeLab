@@ -8,11 +8,12 @@ public class Minotaur {
 
 	//The boolean indicating whether the minotaur is alive or not
 	private boolean _isAlive;
-	
+
 	public int getRow() { return _row; }
 	public int getCol() { return _col; }
 	public void setPos(int r, int c) { _row = r; _col = c; }
-	
+
+	//Constructs a minotaur
 	public Minotaur(int r, int c) {
 		_row = r;
 		_col = c;

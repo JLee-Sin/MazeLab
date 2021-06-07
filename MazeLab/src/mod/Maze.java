@@ -65,18 +65,21 @@ public class Maze {
 	private int[] _curExit;
 	private int[] _curSwordLocations;
 
+	//The methods responsible for setting the current locations of objects in the maze
 	public void set_curPlyStartLocations(int i) {_curPlyStartLocations = _plyStartLocations[i];}
 	public void set_curMinStartLocation(int i) {_curMinStartLocation = _minStartLocations[i];}
 	public void set_curExit(int i) {_curExit = _exit[i];}
 	public void set_curSwordLocations(int i) { _curSwordLocations = _sword[i];}
-	
+
+	//The methods that return the current locations of objects in the maze
 	public boolean[][] getMaze() { return _curMaze; }
 	public int[] getPlyStart() { return _curPlyStartLocations; }
 	public int[] getMinStart() { return _curMinStartLocation; }
 	public int[] getExit() { return _curExit; }
 	public int[] get_swordLocations() { return _curSwordLocations; }
 	public int getMazeNum() {return _i;}
-	
+
+	//Sets the selected maze as active
 	public void setCurMaze(int mazeNum) {
 		_i = mazeNum;
 		_curMaze = _mazeList[_i];
@@ -86,6 +89,7 @@ public class Maze {
 		set_curSwordLocations(_i);
 	}
 
+	//Helper methods to return random rows and columns
 	public int randR() {
 		int x = r.nextInt(8)+1;
 		return x;

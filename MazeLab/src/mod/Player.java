@@ -25,11 +25,14 @@ public class Player {
 	public int getCol() { return _col; }
 	public void setPos(int r, int c) { _row = r; _col = c; }
 	public int getNumOfCoins() {return _numOfCoins;}
+
+	//Increments/decrements the player's coins to represent purchases
 	public void warp() {_numOfCoins=-5;}
 	public void spell() {_numOfCoins=-10;}
 	public void invis() {_numOfCoins=-20;}
 	public void shield() {_numOfCoins=-30;}
-	
+
+	//Constructs a player
 	public Player(int r, int c) {
 		_row = r;
 		_col = c;

@@ -6,6 +6,7 @@ public class Wizard {
     //The integer's representing the wizard's location
     private int _row, _col;
 
+    //Constructs a wizard
     public Wizard(int r, int c) {
         _row = r;
         _col = c;

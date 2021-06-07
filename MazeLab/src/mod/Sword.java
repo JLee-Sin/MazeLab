@@ -13,7 +13,7 @@ public class Sword {
     public int getCol() { return _col; }
     public void setPos(int r, int c) { _row = r; _col = c; }
 
-
+    //Constructs a sword
     public Sword(int r, int c) {
         _row = r;
         _col = c;

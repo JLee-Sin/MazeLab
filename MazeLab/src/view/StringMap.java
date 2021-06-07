@@ -28,14 +28,16 @@ public class StringMap {
 
 	//The sword in the maze
 	private Sword _swrd;
-	
+
+	//The class' constructor that defines the objects in the gui
 	public StringMap(Maze m, Player p, Minotaur t, Sword s) {
 		_maze = m;
 		_plyr = p;
 		_mint = t;
 		_swrd = s;
 	}
-	
+
+	//Creates the map
 	public String generateMap() {
 		 String map = "";
 		 for(int r = 0; r < _maze.getMaze().length; r++) {

@@ -47,6 +47,7 @@ public class World {
 	//The selected difficulty level
 	private int _level;
 
+	//Starts the program
 	public World() {
 		JOP.msg("Welcome to the Maze Game. Use WASD to move or E to exit at anytime, this message can also be viewed at anytime by pressing R", "Rules");
 		JOP.msg("To win either navigate yourself, identified as the letter P to the exit, marked X, or kill the Minotaur, M, after collecting the Sword, ⴕ.", "Rules");
@@ -60,6 +61,8 @@ public class World {
 		_maze = new Maze();
 		play();
 	}
+
+	//Sets up the gui and constructs the necessary objects in the maze
 	public void play() {
 		selectMaze();
 		JOP.msg("Enjoy the game!", " ");
@@ -86,6 +89,7 @@ public class World {
 		update();
 	}
 
+	//The loop that updates the gui
 	public void update() {
 		boolean isPlaying = true;
 		while (isPlaying) {
@@ -182,7 +186,7 @@ public class World {
 
 	}
 
-	// change to getPlayerMove(String s) change to private.
+	// gets the player's input and updates the game
 	private boolean getPlayerMove(String s) {
 		//Go to Shop
 		if(s.equalsIgnoreCase("Z")) {
@@ -265,6 +269,7 @@ public class World {
 		return false;
 	}
 
+	//The minotaur's AI
 	private void moveMinotaur() {
 		int rDist = _player.getRow() - _minotaur.getRow();
 		int cDist = _player.getCol() - _minotaur.getCol();
@@ -290,6 +295,7 @@ public class World {
 		}
 	}
 
+	//Checks if the player has a sword
 	public boolean hasSword() {
 		if (_player.getRow() == _sword.getRow() && _player.getCol() == _sword.getCol()) {
 			_player.giveSword();
@@ -298,11 +304,13 @@ public class World {
 		return false;
 	}
 
+	//Kills the player
 	public boolean death() {
 		_player.kill();
 		return _minotaur.getRow() == _player.getRow() && _minotaur.getCol() == _player.getCol() && !_player.hasSword();
 	}
 
+	//Kills the minotaur
 	public boolean kill() {
 		if (_minotaur.getRow() == _player.getRow() && _minotaur.getCol() == _player.getCol() && _player.hasSword()) {
 			_minotaur.kill();
@@ -311,13 +319,14 @@ public class World {
 		return false;
 	}
 
+	//Ends the game
 	public boolean victory() {
 		if (_player.getRow() == _maze.getExit()[0] && _player.getCol() == _maze.getExit()[1])
 			return true;
 		else return !_minotaur.isAlive();
 	}
 
-
+	//Difficulty select
 	public void selectMaze() {
 		String select = "Would you like to play the Easy level, the Medium level, or the Hard level. You can also use E to exit.";
 		String selection = JOP.in(select, "Level Select");
@@ -345,6 +354,7 @@ public class World {
 		}
 	}
 
+	//The helper method to prevent array out of bounds errors when creating a tunnel
 	public boolean legitTun() {
 		int r = _tunnel.getRow();
 		int c = _tunnel.getCol();
@@ -352,6 +362,7 @@ public class World {
 		return spot;
 	}
 
+	//Moves the player's position when they use a tunnel
 	public void warp() {
 		JOP.msg("You found a Tunnel", "Tunnel");
 		String decide = "Would you like to use it? (Y/N)";
@@ -387,6 +398,7 @@ public class World {
 		}
 	}
 
+	//Finds the exit of tunnel
 	public void findExit() {
 		if (_maze.getMazeNum() == 0 || _maze.getMazeNum() == 1) {
 			_rpm = rand.nextInt(10)+1;
@@ -399,11 +411,13 @@ public class World {
 		}
 	}
 
+	//Increments the number of coins and steps
 	public void coinAndStep() {
 		_player.addCoin();
 		_cnt++;
 	}
 
+	//Checks the player's inventory
 	public void checkInventory() {
 		if(_player.hasSword()) {
 			JOP.msg("You have a sword and " + _player.getNumOfCoins() + " coins", "Inventory");
@@ -416,6 +430,7 @@ public class World {
 		}
 	}
 
+	//The helper method to prevent array out of bounds errors when placing a wizard
 	public boolean legitWiz() {
 		int rW = _wiz.getRow();
 		int cW = _wiz.getCol();
@@ -423,6 +438,7 @@ public class World {
 		return spot;
 	}
 
+	//Starts the player's interaction with a wizard
 	public void cast() {
 		JOP.msg("A mysterious cloaked figure approaches you", "Event");
 		JOP.msg("Wizard: Hello young traveller, for a small price I will rid you of the beast in this place.", "Wizard");
@@ -445,6 +461,7 @@ public class World {
 		}
 	}
 
+	//The method that opens the shop and allows the player to purchase items
 	public void goToShop() {
 		String items = "Press I for an Invisibility Potion, press S for a Shield, press R for a Return Potion or press E to leave";
 		String chosenItem = JOP.in(items, "Shop");
@@ -510,6 +527,7 @@ public class World {
 		}
 	}
 
+	//The method that places and constructs a wizard
 	public void makeWiz() {
 		_wiz = new Wizard(_maze.randRWiz(), _maze.randCWiz());
 		while(!legitWiz()) {
